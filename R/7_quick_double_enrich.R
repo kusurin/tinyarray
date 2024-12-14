@@ -146,14 +146,14 @@ quick_enrich <- function(genes,
 ##' @seealso
 ##' \code{\link{quick_enrich}}
 
-double_enrich <- function(deg,n = 10,color = c("#2874C5", "#f87669")){
+double_enrich <- function(deg,n = 10,color = c("#2874C5", "#f87669"), species = "human"){
 
   if(!requireNamespace("labeling",quietly = TRUE)) {
     stop("Package \"labeling\" needed for this function to work. Please install it byby install.packages('labeling')",call. = FALSE)
   }
   deg$change = str_to_lower(deg$change)
-  up = quick_enrich(deg$ENTREZID[deg$change=="up"],"up.rdata",destdir = tempdir())
-  down = quick_enrich(deg$ENTREZID[deg$change=="down"],"down.rdata",destdir = tempdir())
+  up = quick_enrich(deg$ENTREZID[deg$change=="up"],"up.rdata",destdir = tempdir(),species = species)
+  down = quick_enrich(deg$ENTREZID[deg$change=="down"],"down.rdata",destdir = tempdir(),species = species)
   if(!is.null(up$kk) & !is.null(down$kk) &!is.null(up$go) &!is.null(up$go)){
     up$kk@result = mutate(up$kk@result,change = "up")
     down$kk@result = mutate(down$kk@result,change = "down")
