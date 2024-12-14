@@ -154,8 +154,11 @@ double_enrich <- function(deg,n = 10,color = c("#2874C5", "#f87669"), species = 
     stop("Package \"labeling\" needed for this function to work. Please install it byby install.packages('labeling')",call. = FALSE)
   }
   deg$change = str_to_lower(deg$change)
-  up = quick_enrich(deg$ENTREZID[deg$change=="up"],"up.rdata",destdir = tempdir(),species = species)
-  down = quick_enrich(deg$ENTREZID[deg$change=="down"],"down.rdata",destdir = tempdir(),species = species)
+timestamp <- format(Sys.time(), "%Y%m%d%H%M%S")
+temp_dir <- file.path(tempdir(), timestamp)
+dir.create(temp_dir, recursive = TRUE)
+up = quick_enrich(deg$ENTREZID[deg$change=="up"], "up.rdata", destdir = temp_dir, species = species)
+down = quick_enrich(deg$ENTREZID[deg$change=="down"], "down.rdata", destdir = temp_dir, species = species)
   if(!is.null(up$kk) & !is.null(down$kk) &!is.null(up$go) &!is.null(up$go)){
     up$kk@result = mutate(up$kk@result,change = "up")
     down$kk@result = mutate(down$kk@result,change = "down")
