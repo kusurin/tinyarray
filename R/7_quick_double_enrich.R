@@ -5,6 +5,7 @@
 ##' @param genes a gene symbol or entrizid vector
 ##' @param kkgo_file Rdata filename for kegg and go result
 ##' @param destdir destdir to save kkgofile
+##' @param species species for enrichment analysis, e.g. "human","mouse","rat"
 ##' @inheritParams trans_exp_new
 ##' @return enrichment results and dotplots
 ##' @author Xiaojie Sun
@@ -112,6 +113,7 @@ quick_enrich <- function(genes,
 ##' @param deg a data.frame contains at least two columns:"ENTREZID" and "change"
 ##' @param n how many terms will you perform for up and down genes respectively
 ##' @param color color for bar plot
+##' @param species species for enrichment analysis, e.g. "human","mouse","rat"
 ##' @return a list with kegg and go bar plot according to up and down genes enrichment result.
 ##' @author Xiaojie Sun
 ##' @importFrom stringr str_to_lower
